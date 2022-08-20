@@ -22,9 +22,22 @@ export default function TextForm(props) {
     }
 
     const searchText = (event)=> {
-        if(text.indexOf(searchQuery) !== -1) {
-            console.log(text.indexOf(searchQuery));
-        }
+        let indexes = [];
+
+            let searchString = searchQuery.toUpperCase();
+            let tmp = text.toUpperCase();
+            let index=0 - searchQuery.length;
+            while(true) {
+                tmp = tmp.substring(index+searchQuery.length,tmp.length);
+                index = tmp.indexOf(searchString);
+                if(index != -1) {
+                    indexes.push(index);
+                    setText(text.substring(0,index) + "<span class='highlight'>" + text.substring(index,index + searchQuery.length) + "</span> " + text.substring(index + searchQuery.length,text.length));
+                }
+                else 
+                    break; 
+            }
+            console.log(indexes);
     }
     const clearText = (event)=> {
         let newText = '';
@@ -42,7 +55,7 @@ export default function TextForm(props) {
     const handleExtraSpaces = ()=>{
         let newText = text.split(/[ ]+/);
         setText(newText.join(" "));
-        props.showAlert("Extra Spaces R","success");
+        props.showAlert("Extra Spaces Removed","success");
     }
 
     const[searchQuery,setSearchQuery] = useState('');
@@ -63,9 +76,10 @@ export default function TextForm(props) {
         </div>
         <div className="container my-2" style = {{color:props.mode==='light'?'black':'white'}}>
         
-            {/* <input value={searchQuery} onChange={handleOnChangeSearch} className="form-control me-2" placeholder="Search text" aria-label="Search"/>
-            <button onClick={searchText} className="btn btn-outline-primary my-3">Search</button> */}
-        
+            <div className="search-utility">
+                <input value={searchQuery} onChange={handleOnChangeSearch} className="form-control me-2" placeholder="Search text" aria-label="Search"/>
+                <button onClick={searchText} className="btn btn-primary my-3">Search</button>
+            </div>
             <h2>Your Text Summary</h2>
             <p>Words: {text.split(/\s+/).filter((element)=>{return element.length!==0}).length}<br/>Characters:{text.length}<br/> {0.008 * text.split(" ").length} minutes read </p>
             <h2>Preview</h2>

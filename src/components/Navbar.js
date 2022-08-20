@@ -24,6 +24,9 @@ export default function Navbar(props) {
                     <div className={`form-check form-switch text-${props.mode==='light'?'dark':'light'}`}>
                         {/* <input onClick = {props.toggleMode} className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"/> */}
 
+                        
+                        <label style={{fontSize:'1.2em', fontWeight:'bold'}} className="form-check-label" htmlFor="flexSwitchCheckDefault">Change Website's Color</label>
+
                         <button onClick={() => props.changeColor('red')} style = {{backgroundColor:'red',padding:'1em',marginLeft:'1em',marginRight:'1em',borderRadius:'100%'}}></button>
                         
                         <button onClick={() => props.changeColor('green')} style = {{backgroundColor:'green',padding:'1em',marginLeft:'1em',marginRight:'1em',borderRadius:'100%'}}></button>
@@ -37,7 +40,6 @@ export default function Navbar(props) {
 
                         <button onClick={() => props.changeColor('black')} style = {{backgroundColor:'black',padding:'1em',marginLeft:'1em',marginRight:'1em',borderRadius:'100%'}}></button>
 
-                        <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Change Website's Color</label>
                     </div>
 
                 </div>
